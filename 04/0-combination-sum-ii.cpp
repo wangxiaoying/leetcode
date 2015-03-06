@@ -24,6 +24,7 @@ public:
 		if(pos >= candidates.size()) return;
 		if(pos && candidates[pos] == candidates[pos-1]){
 			findCombination(candidates, map_candidates, ans, target, pos+1, tmp);
+			return;
 		}
 		
 		if(target < candidates[pos]) return;
@@ -43,24 +44,15 @@ public:
 
 	vector<vector<int> > combinationSum2(vector<int> &num, int target) {
 		vector<vector<int>> ans;
-		vector<int> candidates;
 		map<int, int> map_candidates;
 		for(vector<int>::iterator itr = num.begin(); itr != num.end(); ++itr){
 			map_candidates[*itr]++;
 		}
 		
-		
-		for(map<int, int>::iterator iter = map_candidates.begin(); iter != map_candidates.end(); ++iter){
-			candidates.push_back(iter->first);
-		}
-		
-		for(int i = 0; i < num.size(); ++i){
-			cout<<num[i]<<" ";
-		}
-		cout<<endl;
+		sort(num.begin(), num.end());
 		
 		if(num.size()){
-			findCombination(candidates, map_candidates, ans, target, 0, *new vector<int>);
+			findCombination(num, map_candidates, ans, target, 0, *new vector<int>);
 		}
 		
 		return ans;
