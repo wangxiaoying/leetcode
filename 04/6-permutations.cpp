@@ -10,27 +10,27 @@ For example,
 
 class Solution {
 public:
-void compute(vector<int> &num, vector<vector<int>> &ans, vector<bool> &flags, vector<int> &temp){
-    if(temp.size() == num.size()){
-        ans.push_back(temp);
-        return;
-    }
-    
-    for(int i = 0; i < num.size(); ++i){
-        if(flags[i]) continue;
-        temp.push_back(num[i]);
-        flags[i] = true;
-        compute(num, ans, flags, temp);
-        flags[i] = false;
-        temp.pop_back();
-    }
-}
+	void compute(vector<int> &num, vector<vector<int>> &ans, vector<bool> &flags, vector<int> &temp){
+		if(temp.size() == num.size()){
+			ans.push_back(temp);
+			return;
+		}
+		
+		for(int i = 0; i < num.size(); ++i){
+			if(flags[i]) continue;
+			temp.push_back(num[i]);
+			flags[i] = true;
+			compute(num, ans, flags, temp);
+			flags[i] = false;
+			temp.pop_back();
+		}
+	}
 
-vector<vector<int> > permute(vector<int> &num) {
-    vector<vector<int>> ans;
-    vector<bool> flags(num.size(), false);
-    
-    compute(num, ans, flags, *new vector<int>());
-    return ans;
-}
+	vector<vector<int> > permute(vector<int> &num) {
+		vector<vector<int>> ans;
+		vector<bool> flags(num.size(), false);
+		
+		compute(num, ans, flags, *new vector<int>());
+		return ans;
+	}
 };
